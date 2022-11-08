@@ -2,6 +2,11 @@
 
 namespace Config;
 
+use App\Filters\CekLoginFilter;
+use App\Filters\LoginFilter as FiltersLoginFilter;
+use App\Filters\LoginFilter;
+use CodeIgniter\Filters\CekSudahLoginFilter;
+
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -23,6 +28,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'auth'          => LoginFilter::class,
+        'ceklogin'      => CekLoginFilter::class
     ];
 
     /**
