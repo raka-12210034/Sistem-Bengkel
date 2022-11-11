@@ -18,8 +18,12 @@
                         <tr>
                             <th>No</th>
                             <th>Tanggal</th>
+                            <th>Tanggal Bayar</th>
                             <th>Metode Bayar</th>
+                            <th>Di Bayar Oleh</th>
+                            <th>Catatan</th>
                             <th>Karyawan</th>
+                            <th>Total Bayar</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -53,6 +57,10 @@
                                 </select>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Tanggal Bayar</label>
+                                <input type="date" name="tgl_byr" class="form-control">
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label">Metode Bayar</label>
                                 <select name="metodebayar_id" class="form-control">
                                     <?php
@@ -68,6 +76,14 @@
                                 </select>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Di Bayar Oleh</label>
+                                <input type="text" name="dibayaroleh" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Catatan</label>
+                                <input type="text" name="catatan" class="form-control">
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label"> Karyawan</label>
                                 <select name="karyawan_id" class="form-control">
                                     <?php
@@ -81,6 +97,10 @@
                                         }
                                     ?>
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Total Bayar</label>
+                                <input type="text" name="total_bayar" class="form-control">
                             </div>
                         </form>
                         </div>
@@ -135,8 +155,12 @@
             $.get(`${baseurl}/pembayaran/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=pemeriksaan_id]').val(e.pemeriksaan_id);
+                $('input[name=tgl_byr').val(e.tgl_byr);
                 $('input[name=metodebayar_id]').val(e.metodebayar_id);
+                $('input[name=dibayaroleh]').val(e.dibayaroleh);
+                $('input[name=catatan]').val(e.catatan);
                 $('input[name=karyawan_id]').val(e.karyawan_id);
+                $('input[name=total_bayar]').val(e.total_bayar);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -173,12 +197,16 @@
                 {data: 'tgl', render:(data,type,row,meta)=>{
                     return `${data}`;
                 }},
+                {data: 'tgl_byr',},
                 {data: 'metodebayar', render:(data,type,row,meta)=>{
                     return `${data}`;
                 }},
+                {data: 'dibayaroleh',},
+                {data: 'catatan',},
                 {data: 'nama_lengkap', render:(data,type,row,meta)=>{
                     return `${data}`;
                 }},
+                {data: 'total_bayar',},
                 {data: 'id',
                     render: (data,type,meta,row)=>{
                         var btnEdit     = `<button class='btn btn-light' data-id='${data}'> Edit</button>`;

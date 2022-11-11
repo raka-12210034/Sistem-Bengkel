@@ -19,6 +19,11 @@
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Kendaraan</th>
+                            <th>Kilometer Sekarang</th>
+                            <th>Catatan</th>
+                            <th>Servie Advisor</th>
+                            <th>Montir</th>
+                            <th>Tagihan</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -39,10 +44,34 @@
                             <input type="hidden" name="_method" />
                             <div class="mb-3">
                                 <label class="form-label">Tanggal</label>
-                                <input type="datetime" name="tgl" class="form-control">
-                            </div> <div class="mb-3">
+                                <input type="date" name="tgl" class="form-control">
+                            </div> 
+                            <div class="mb-3">
                                 <label class="form-label">Kendaraan</label>
                                 <input type="text" name="kendaraan_id" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Kilometer Sekarang</label>
+                                <input type="text" name="kilometer_skr" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Catatan</label>
+                                <input type="text" name="catatan" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Servie Advisor</label>
+                                <input type="text" name="sa_karyawan_id" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Montir</label>
+                                <input type="text" name="mon_karyawan_id" class="form-control">
+                            </div> 
+                            <div class="mb-3">
+                                <label class="form-label">Tagihan</label>
+                                <input type="text" name="tagihan" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
@@ -111,6 +140,11 @@
                 $('input[name=id]').val(e.id);
                 $('input[name=tgl]').val(e.tgl);
                 $('input[name=kendaraan_id]').val(e.kendaraan_id);
+                $('input[name=kilometer_skr]').val(e.kilometer_skr);
+                $('input[name=catatan]').val(e.catatan);
+                $('input[name=sa_karyawan_id]').val(e.sa_karyawan_id);
+                $('input[name=mon_karyawan_id]').val(e.mon_karyawan_id);
+                $('input[name=tagihan]').val(e.tagihan);
                 $('input[name=statuspemeriksaan_id]').val(e.statuspemeriksaan_id);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
@@ -147,6 +181,11 @@
                 },
                 {data: 'tgl',},
                 {data: 'kendaraan_id',},
+                {data: 'kilometer_skr',},
+                {data: 'catatan',},
+                {data: 'sa_karyawan_id',},
+                {data: 'mon_karyawan_id',},
+                {data: 'tagihan',},
                 {data: 'status', render:(data,type,row,meta)=>{
                     return `${data}`;
                 }},

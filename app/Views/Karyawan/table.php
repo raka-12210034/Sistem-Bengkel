@@ -24,6 +24,12 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
+                            <th>No Hp</th>
+                            <th>Alamat</th>
+                            <th>Kota</th>
+                            <th>Sandi</th>
+                            <th>Token Reset</th>
+                            <th>Level</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -49,6 +55,31 @@
                                 <label class="form-label">Email</label>
                                 <input type="text" name="email" class="form-control">
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">No Hp</label>
+                                <input type="text" name="nohp" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Alamat</label>
+                                <input type="text" name="alamat" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Kota</label>
+                                <input type="text" name="kota" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Sandi</label>
+                                <input type="text" name="sandi" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Token Reset</label>
+                                <input type="text" name="token_reset" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Level</label>
+                                <input type="text" name="level" class="form-control">
+                            </div>
+                            
                         </form>
                         </div>
                         <div class="modal-footer">
@@ -103,6 +134,12 @@
                 $('input[name=id]').val(e.id);
                 $('input[name=nama_lengkap]').val(e.nama_lengkap);
                 $('input[name=email]').val(e.email);
+                $('input[name=nohp]').val(e.nohp);
+                $('input[name=alamat]').val(e.alamat);
+                $('input[name=kota]').val(e.kota);
+                $('input[name=sandi]').val(e.sandi);
+                $('input[name=token_reset]').val(e.token_reset);
+                $('input[name=level]').val(e.level);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -138,6 +175,12 @@
                 },
                 {data: 'nama_lengkap',},
                 {data: 'email',},
+                {data: 'nohp',},
+                {data: 'alamat',},
+                {data: 'kota',},
+                {data: 'sandi',},
+                {data: 'token_reset',},
+                {data: 'level',},
                 {data: 'id',
                     render: (data,type,meta,row)=>{
                         var btnEdit     = `<button class='btn btn-light' data-id='${data}'> Edit</button>`;

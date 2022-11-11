@@ -90,10 +90,10 @@ class KaryawanController extends BaseController
     }
     public function all(){
         $mm = new KaryawanModel();
-        $mm->select(['id', 'nama_lengkap', 'email']);
+        $mm->select(['id', 'nama_lengkap', 'email','nohp','alamat','kota','sandi','token_reset','level']);
         
         return (new Datatable ($mm))
-                ->setFieldFilter(['nama_lengkap', 'email'])
+                ->setFieldFilter(['nama_lengkap', 'email','nohp','alamat','kota','sandi','token_reset','level'])
                 ->draw();
     }
     public function show($id){
@@ -108,6 +108,12 @@ class KaryawanController extends BaseController
         $id =  $mm -> insert([
             'nama_lengkap'       => $this->request->getVar('nama_lengkap'),
             'email'    => $this->request->getVar('email'),
+            'nohp'    => $this->request->getVar('nohp'),
+            'alamat'    => $this->request->getVar('alamat'),
+            'kota'    => $this->request->getVar('kota'),
+            'sandi'    => $this->request->getVar('sandi'),
+            'token_reset'    => $this->request->getVar('token_reset'),
+            'level'    => $this->request->getVar('level'),
         ]);
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
@@ -122,6 +128,12 @@ class KaryawanController extends BaseController
         $hasil = $mm->update($id,[
             'nama_lengkap'       => $this->request->getVar('nama_lengkap'),
             'email'    => $this->request->getVar('email'),
+            'nohp'    => $this->request->getVar('nohp'),
+            'alamat'    => $this->request->getVar('alamat'),
+            'kota'    => $this->request->getVar('kota'),
+            'sandi'    => $this->request->getVar('sandi'),
+            'token_reset'    => $this->request->getVar('token_reset'),
+            'level'    => $this->request->getVar('level'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
     }

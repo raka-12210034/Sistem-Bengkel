@@ -21,7 +21,7 @@ class PemeriksaanController extends BaseController
         $mm = PemeriksaanModel::view();
         
         return (new Datatable ($mm))
-                ->setFieldFilter([ 'status'])
+                ->setFieldFilter([ 'tgl','kendaraan_id','kilometer_skr','catatan','sa_karyawan_id','mon_karyawan_id','tagihan','status'])
                 ->draw();
     }
     public function show($id){
@@ -36,6 +36,11 @@ class PemeriksaanController extends BaseController
         $id =  $mm -> insert([
             'tgl'       => $this->request->getVar('tgl'),
             'kendaraan_id'       => $this->request->getVar('kendaraan_id'),
+            'kilometer_skr'       => $this->request->getVar('kilometer_skr'),
+            'catatan'       => $this->request->getVar('catatan'),
+            'sa_karyawan_id'       => $this->request->getVar('sa_karyawan_id'),
+            'mon_karyawan_id'       => $this->request->getVar('mon_karyawan_id'),
+            'tagihan'       => $this->request->getVar('tagihan'),
             'statuspemeriksaan_id'       => $this->request->getVar('statuspemeriksaan_id'),
         ]);
         return $this->response->setJSON(['id' => $id])
@@ -51,6 +56,11 @@ class PemeriksaanController extends BaseController
         $hasil = $mm->update($id,[
             'tgl'       => $this->request->getVar('tgl'),
             'kendaraan_id'       => $this->request->getVar('kendaraan_id'),
+            'kilometer_skr'       => $this->request->getVar('kilometer_skr'),
+            'catatan'       => $this->request->getVar('catatan'),
+            'sa_karyawan_id'       => $this->request->getVar('sa_karyawan_id'),
+            'mon_karyawan_id'       => $this->request->getVar('mon_karyawan_id'),
+            'tagihan'       => $this->request->getVar('tagihan'),
             'statuspemeriksaan_id'       => $this->request->getVar('statuspemeriksaan_id'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);

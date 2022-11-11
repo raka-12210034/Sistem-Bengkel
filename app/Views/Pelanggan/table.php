@@ -17,7 +17,15 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Nama Depan</th>
+                            <th>Nama Belakang</th>
+                            <th>Gender </th>
+                            <th>Alamat </th>
+                            <th>Kota </th>
+                            <th>Notelp </th>
+                            <th>Hp </th>
+                            <th>Email </th>
+                            <th>Tanggal Daftar </th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,9 +44,48 @@
                             <input type="hidden" name="id" />
                             <input type="hidden" name="_method" />
                             <div class="mb-3">
-                                <label class="form-label">Nama</label>
+                                <label class="form-label">Nama Depan</label>
                                 <input type="text" name="nama_depan" class="form-control">
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama Belakang</label>
+                                <input type="text" name="nama_belakang" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <select name="gender" class="form-control">
+                                    <option>Gender</option>
+                                    <option value="L">Laki - Laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Alamat</label>
+                                <input type="text" name="alamat" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Kota</label>
+                                <input type="text" name="kota" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Notelp</label>
+                                <input type="text" name="notelp" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Hp</label>
+                                <input type="text" name="hp" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="text" name="email" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tanggal Daftar</label>
+                                <input type="text" name="tgl_daftar" class="form-control">
+                            </div>
+                            
+                            
+
                         <div class="modal-footer">
                             <button class="btn btn-success" id="btn-menambahkan" >Menambahkan</button>
                         </div>
@@ -90,6 +137,14 @@
             $.get(`${baseurl}/pelanggan/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=nama_depan]').val(e.nama_depan);
+                $('input[name=nama_belakang]').val(e.nama_belakang);
+                $('input[name=gender]').val(e.gender);
+                $('input[name=alamat]').val(e.alamat);
+                $('input[name=kota]').val(e.kota);
+                $('input[name=notelp]').val(e.notelp);
+                $('input[name=hp]').val(e.hp);
+                $('input[name=email]').val(e.email);
+                $('input[name=tgl_daftar]').val(e.tgl_daftar);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -124,6 +179,24 @@
                     }
                 },
                 {data: 'nama_depan',},
+                {data: 'nama_belakang',},
+                {data: 'gender',
+                    render: (data,type,row,meta)=>{
+                        if(data === 'L'){
+                            return 'Laki - Laki';
+                        }
+                        else if(data === 'P'){
+                            return 'Perempuan';
+                        }
+                        return data;
+                    }
+                },
+                {data: 'alamat',},
+                {data: 'kota',},
+                {data: 'notelp',},
+                {data: 'hp',},
+                {data: 'email',},
+                {data: 'tgl_daftar',},
                 {data: 'id',
                     render: (data,type,meta,row)=>{
                         var btnEdit     = `<button class='btn btn-light' data-id='${data}'> Edit</button>`;

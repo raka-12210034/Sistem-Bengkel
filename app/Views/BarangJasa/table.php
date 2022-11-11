@@ -18,6 +18,10 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
+                            <th>Jenis Barang Jasa</th>
+                            <th>Unit Satuan</th>
+                            <th>Harga Satuan</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -38,6 +42,36 @@
                             <div class="mb-3">
                                 <label class="form-label">Nama</label>
                                 <input type="text" name="nama" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Jenis Barang Jasa</label>
+                                <select name="jenis_bj" class="form-control">
+                                    <option value="B">Barang</option>
+                                    <option value="J">Jasa</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Unit Satuan</label>
+                                <select name="unitsatuan_id" class="form-control">
+                                    <?php
+                                        use App\Models\UnitsatuanModel;
+
+
+                                        $r = (new UnitsatuanModel())->findAll();
+                                        
+                                        foreach($r as $k){
+                                            echo "<option value='{$k['id']}'>{$k['satuan']}</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Harga Satuan</label>
+                                <input type="text" name="harga_satuan" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Keterangan</label>
+                                <input type="text" name="keterangan" class="form-control">
                             </div>
                         </form>
                         </div>
@@ -92,6 +126,10 @@
             $.get(`${baseurl}/barangjasa/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=nama]').val(e.nama);
+                $('input[name=jenis_bj]').val(e.jenis_bj);
+                $('input[name=unitsatuan_id]').val(e.unitsatuan_id);
+                $('input[name=harga_satuan]').val(e.harga_satuan);
+                $('input[name=keterangan]').val(e.keterangan);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -126,6 +164,22 @@
                     }
                 },
                 {data: 'nama',},
+                {data: 'jenis_bj',
+                    render: (data,type,row,meta)=>{
+                        if(data === 'B'){
+                            return 'Barang';
+                        }
+                        else if(data === 'J'){
+                            return 'Jasa';
+                        }
+                        return data;
+                    }
+                },
+                {data: 'satuan', render:(data,type,row,meta)=>{
+                    return `${data}`;
+                }},
+                {data: 'harga_satuan',},
+                {data: 'keterangan',},
                 {data: 'id',
                     render: (data,type,meta,row)=>{
                         var btnEdit     = `<button class='btn btn-light' data-id='${data}'> Edit</button>`;

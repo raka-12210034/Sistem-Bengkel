@@ -39,4 +39,9 @@ class BarangJasaModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+    static function view(){
+        return (new BarangJasaModel())
+        ->join('unitsatuan', 'unitsatuan.id=unitsatuan_id')
+        ->select('barangjasa.*,unitsatuan.satuan');
+    }
 }

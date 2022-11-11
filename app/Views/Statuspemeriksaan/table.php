@@ -19,6 +19,7 @@
                             <th>No</th>
                             <th>Status</th>
                             <th>Urutan</th>
+                            <th>Aktif</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -43,6 +44,10 @@
                             <div class="mb-3">
                                 <label class="form-label">Urutan</label>
                                 <input type="text" name="status" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Aktif</label>
+                                <input type="text" name="aktif" class="form-control">
                             </div>
                         </form>
                         </div>
@@ -98,6 +103,7 @@
                 $('input[name=id]').val(e.id);
                 $('input[name=status]').val(e.status);
                 $('input[name=urutan]').val(e.urutan);
+                $('input[name=aktif]').val(e.aktif);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -133,6 +139,7 @@
                 },
                 {data: 'status',},
                 {data: 'urutan',},
+                {data: 'aktif',},
                 {data: 'id',
                     render: (data,type,meta,row)=>{
                         var btnEdit     = `<button class='btn btn-light' data-id='${data}'> Edit</button>`;

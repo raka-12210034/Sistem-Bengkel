@@ -18,6 +18,8 @@
                         <tr>
                             <th>No</th>
                             <th>Metode Bayar</th>
+                            <th>Keterangan</th>
+                            <th>Aktif</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -38,6 +40,18 @@
                             <div class="mb-3">
                                 <label class="form-label">Metode Bayar</label>
                                 <input type="text" name="metodebayar" class="form-control">
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label class="form-label">Keterangan</label>
+                                <input type="text" name="keterangan" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Aktif</label>
+                                <select name="aktif" class="form-control">
+                                    <option value="L">Ya</option>
+                                    <option value="P">Tidak</option>
+                                </select>
                             </div>
                         </form>
                         </div>
@@ -92,6 +106,8 @@
             $.get(`${baseurl}/pelanggan/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=metodebayar]').val(e.metodebayar);
+                $('input[name=keterangan]').val(e.keterangan);
+                $('input[name=aktif]').val(e.aktif);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -126,6 +142,18 @@
                     }
                 },
                 {data: 'metodebayar',},
+                {data: 'keterangan',},
+                {data: 'aktif',
+                    render: (data,type,row,meta)=>{
+                        if(data === 'Y'){
+                            return 'Ya';
+                        }
+                        else if(data === 'T'){
+                            return 'Tidak';
+                        }
+                        return data;
+                    }
+                },
                 {data: 'id',
                     render: (data,type,meta,row)=>{
                         var btnEdit     = `<button class='btn btn-light' data-id='${data}'> Edit</button>`;

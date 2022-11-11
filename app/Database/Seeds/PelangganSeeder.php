@@ -16,10 +16,10 @@ class PelangganSeeder extends Seeder
             'gender' => 'P',
             'alamat' => 'Jl.samaaku Gg.guindia A.12',
             'kota' => 'Serpong',
-            'notelp' => '+628 1221 0034',
+            'notelp' => '081222003456',
             'hp' => 'POCO X3 NFC',
             'email' => 'bellaimoet@gmail.com',
-            'tgl_daftar' => '17-08-2001',
+            'tgl_daftar' => '2001-09-11',
         ]);
         echo "hasil id = $id";
     }

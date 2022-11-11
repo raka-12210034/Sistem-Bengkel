@@ -21,7 +21,7 @@ class PembayaranController extends BaseController
         $kgm = PembayaranModel::view();
          
         return (new Datatable($kgm))
-        ->setFieldFilter([ 'tgl' , 'metodebayar', 'nama_lengkap'])
+        ->setFieldFilter([ 'tgl', 'tgl_byr' , 'metodebayar','dibayaroleh','catatan','nama_lengkap','total_bayar'])
         ->draw();
     }
     public function show($id){
@@ -35,8 +35,12 @@ class PembayaranController extends BaseController
 
         $id =  $mm -> insert([
             'pemeriksaan_id'       => $this->request->getVar('pemeriksaan_id'),
+            'tgl_byr'       => $this->request->getVar('tgl_byr'),
             'metodebayar_id'    => $this->request->getVar('metodebayar_id'),
+            'dibayaroleh'    => $this->request->getVar('dibayaroleh'),
+            'catatan'    => $this->request->getVar('catatan'),
             'karyawan_id'    => $this->request->getVar('karyawan_id'),
+            'total_bayar'    => $this->request->getVar('total_bayar'),
         ]);
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
@@ -50,8 +54,12 @@ class PembayaranController extends BaseController
         
         $hasil = $mm->update($id,[
             'pemeriksaan_id'       => $this->request->getVar('pemeriksaan_id'),
+            'tgl_byr'       => $this->request->getVar('tgl_byr'),
             'metodebayar_id'    => $this->request->getVar('metodebayar_id'),
+            'dibayaroleh'    => $this->request->getVar('dibayaroleh'),
+            'catatan'    => $this->request->getVar('catatan'),
             'karyawan_id'    => $this->request->getVar('karyawan_id'),
+            'total_bayar'    => $this->request->getVar('total_bayar'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
     }

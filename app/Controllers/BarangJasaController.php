@@ -18,11 +18,10 @@ class BarangjasaController extends BaseController
         return view('barangjasa/table');       
     }
     public function all(){
-        $mm = new BarangJasaModel();
-        $mm->select(['id', 'nama']);
+        $kgm = BarangJasaModel::view();
          
-        return (new Datatable($mm))
-        ->setFieldFilter([ 'nama'])
+        return (new Datatable($kgm))
+        ->setFieldFilter([ 'nama' , 'jenis_bj','satuan','harga_satuan','keterangan'])
         ->draw();
     }
     public function show($id){
@@ -36,6 +35,10 @@ class BarangjasaController extends BaseController
 
         $id =  $mm -> insert([
             'nama'       => $this->request->getVar('nama'),
+            'jenis_bj'       => $this->request->getVar('jenis_bj'),
+            'unitsatuan_id'       => $this->request->getVar('unitsatuan_id'),
+            'harga_satuan'       => $this->request->getVar('harga_satuan'),
+            'keterangan'       => $this->request->getVar('keterangan'),
         ]);
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
@@ -49,6 +52,10 @@ class BarangjasaController extends BaseController
         
         $hasil = $mm->update($id,[
             'nama'       => $this->request->getVar('nama'),
+            'jenis_bj'       => $this->request->getVar('jenis_bj'),
+            'unitsatuan_id'       => $this->request->getVar('unitsatuan_id'),
+            'harga_satuan'       => $this->request->getVar('harga_satuan'),
+            'keterangan'       => $this->request->getVar('keterangan'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
     }

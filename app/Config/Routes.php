@@ -92,7 +92,7 @@ $routes->group('statuspemeriksaan', function(RouteCollection $routes){
     $routes->get('all', 'StatuspemeriksaanController::all');
 });
 
-$routes->group('Kendaraan', function(RouteCollection $routes){
+$routes->group('kendaraan', function(RouteCollection $routes){
     $routes->get('/', 'KendaraanController::index');
     $routes->post('/', 'KendaraanController::store');
     $routes->patch('/', 'KendaraanController::update');

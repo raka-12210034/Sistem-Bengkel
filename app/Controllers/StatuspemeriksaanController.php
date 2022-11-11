@@ -15,10 +15,10 @@ class StatuspemeriksaanController extends BaseController
     }
     public function all(){
         $mm = new StatuspemeriksaanModel();
-        $mm->select(['id', 'status', 'urutan']);
+        $mm->select(['id', 'status', 'urutan','aktif']);
         
         return (new Datatable ($mm))
-                ->setFieldFilter(['status', 'urutan' ])
+                ->setFieldFilter(['status', 'urutan','aktif' ])
                 ->draw();
     }
     public function show($id){
@@ -32,7 +32,8 @@ class StatuspemeriksaanController extends BaseController
 
         $id =  $mm -> insert([
             'status'       => $this->request->getVar('status'),
-            'urutan'    => $this->request->getVar('urutan'),
+            'urutan'    => $this->request->getVar('urutan'), 
+            'aktif'    => $this->request->getVar('aktif'), 
         ]);
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
@@ -47,6 +48,7 @@ class StatuspemeriksaanController extends BaseController
         $hasil = $mm->update($id,[
             'status'       => $this->request->getVar('status'),
             'urutan'    => $this->request->getVar('urutan'),
+            'aktif'    => $this->request->getVar('aktif'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
     }

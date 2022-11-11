@@ -19,10 +19,10 @@ class MetodebayarController extends BaseController
     }
     public function all(){
         $mm = new MetodebayarModel();
-        $mm->select(['id', 'metodebayar']);
+        $mm->select(['id', 'metodebayar','keterangan','aktif']);
         
         return (new Datatable ($mm))
-                ->setFieldFilter(['metodebayar'])
+                ->setFieldFilter(['metodebayar','keterangan','aktif'])
                 ->draw();
     }
     public function show($id){
@@ -36,6 +36,8 @@ class MetodebayarController extends BaseController
 
         $id =  $mm -> insert([
             'metodebayar'       => $this->request->getVar('metodebayar'),
+            'keterangan'       => $this->request->getVar('keterangan'),
+            'aktif'       => $this->request->getVar('aktif'),
         ]);
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
@@ -49,6 +51,8 @@ class MetodebayarController extends BaseController
         
         $hasil = $mm->update($id,[
             'metodebayar'       => $this->request->getVar('metodebayar'),
+            'keterangan'       => $this->request->getVar('keterangan'),
+            'aktif'       => $this->request->getVar('aktif'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
     }

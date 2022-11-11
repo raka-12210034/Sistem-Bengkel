@@ -18,6 +18,7 @@
                         <tr>
                             <th>No</th>
                             <th>Jenis</th>
+                            <th>Aktif</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -38,6 +39,10 @@
                             <div class="mb-3">
                                 <label class="form-label">Jenis</label>
                                 <input type="text" name="jenis" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Aktif</label>
+                                <input type="text" name="aktif" class="form-control">
                             </div>
                         </form>
                         </div>
@@ -92,6 +97,7 @@
             $.get(`${baseurl}/jeniskendaraan/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=jenis]').val(e.jenis);
+                $('input[name=aktif]').val(e.aktif);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -126,6 +132,7 @@
                     }
                 },
                 {data: 'jenis',},
+                {data: 'aktif',},
                 {data: 'id',
                     render: (data,type,meta,row)=>{
                         var btnEdit     = `<button class='btn btn-light' data-id='${data}'> Edit</button>`;

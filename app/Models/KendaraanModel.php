@@ -44,6 +44,7 @@ class KendaraanModel extends Model
         return (new KendaraanModel())
         ->join('pelanggan', 'pelanggan.id=pelanggan_id')
         ->join('jeniskendaraan', 'jeniskendaraan.id=jeniskendaraan_id')
-        ->select('kendaraan.*,pelanggan.nama_depan,jeniskendaraan.jenis,');
+        ->join('warnakendaraan', 'warnakendaraan.id=warnakendaraan_id')
+        ->select('kendaraan.*,pelanggan.nama_depan,jeniskendaraan.jenis,warnakendaraan.warna');
     }
 }

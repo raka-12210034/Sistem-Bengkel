@@ -13,12 +13,15 @@
 
             <div class="container">
                 <button class="float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
-                <table id='table-Kendaraan' class="datatable table table-bordered">
+                <table id='table-kendaraan' class="datatable table table-bordered">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Pelanggan</th>
                             <th>Jenis Kendaraan</th>
+                            <th>No Polisi</th>
+                            <th>Tahun</th>
+                            <th>Warna Kendaraan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -33,7 +36,7 @@
                             <button class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="formKendaraan" method="post" action="<?=base_url('Kendaraan') ?>">
+                            <form id="formkendaraan" method="post" action="<?=base_url('kendaraan') ?>">
                             <input type="hidden" name="id" />
                             <input type="hidden" name="_method" />
                             <div class="mb-3">
@@ -53,15 +56,27 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Jenis Kendaraan</label>
-                                <select name="jeniskendaraan_id" class="form-control">
+                                <input type="text" name="jeniskendaraan_id" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">No Polisi</label>
+                                <input type="text" name="no_pol" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tahun</label>
+                                <input type="text" name="tahun" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Warna Kendaraan</label>
+                                <select name="warnakendaraan_id" class="form-control">
                                     <?php
-                                        use App\Models\JenisKendaraanModel;
+                                        use App\Models\WarnaKendaraanModel;
 
 
-                                        $r = (new JenisKendaraanModel())->findAll();
+                                        $r = (new WarnaKendaraanModel())->findAll();
                                         
                                         foreach($r as $k){
-                                            echo "<option value='{$k['id']}'>{$k['jenis']}</option>";
+                                            echo "<option value='{$k['id']}'>{$k['warna']}</option>";
                                         }
                                     ?>
                                 </select>
@@ -79,7 +94,7 @@
     $(document).ready(function(){
         
         
-        $('form#formKendaraan').submitAjax({
+        $('form#formkendaraan').submitAjax({
         pre:()=>{
             $('button#btn-menambahkan').hide();
             
@@ -91,7 +106,7 @@
 
         success:(response, status)=>{
             $("#modalForm").modal('hide');
-            $("table#table-Kendaraan").DataTable().ajax.reload();
+            $("table#table-kendaraan").DataTable().ajax.reload();
         },
 
         error:(xhr, status)=>{
@@ -102,49 +117,52 @@
 
 
         $('button#btn-menambahkan').on('click' , function(){
-            $('form#formKendaraan').submit();
+            $('form#formkendaraan').submit();
 
         });
 
 
         $('button#btn-tambah').on('click' , function(){
             $('#modalForm').modal('show');
-            $('form#formKendaraan').trigger('reset');
+            $('form#formkendaraan').trigger('reset');
             $('input[name=_method]').val('');
         });
 
-        $('table#table-Kendaraan').on('click', '.btn-light', function (){
+        $('table#table-kendaraan').on('click', '.btn-light', function (){
             let id = $(this).data('id');
             let baseurl = "<?=base_url()?>";
-            $.get(`${baseurl}/Kendaraan/${id}`).done((e)=>{
+            $.get(`${baseurl}/kendaraan/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=pelanggan_id]').val(e.pelanggan_id);
                 $('input[name=jeniskendaraan_id]').val(e.jeniskendaraan_id);
+                $('input[name=no_pol]').val(e.no_pol);
+                $('input[name=tahun]').val(e.tahun);
+                $('input[name=warnakendaraan_id]').val(e.warnakendaraan_id);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
             });
         });
 
-        $('table#table-Kendaraan').on('click', '.btn-danger', function (){
+        $('table#table-kendaraan').on('click', '.btn-danger', function (){
             let konfirmasi = confirm ('yakin hapus data?');
             if(konfirmasi === true){
                 let _id = $(this).data('id');
                 let baseurl = "<?=base_url()?>";
 
 
-                $.post(`${baseurl}/Kendaraan`, {id:_id, _method:'delete'}).done(function(e){
-                    $('table#table-Kendaraan').DataTable().ajax.reload();
+                $.post(`${baseurl}/kendaraan`, {id:_id, _method:'delete'}).done(function(e){
+                    $('table#table-kendaraan').DataTable().ajax.reload();
                 });
             }
         });
 
 
-        $('table#table-Kendaraan').DataTable({
+        $('table#table-kendaraan').DataTable({
             processing: true,
             serverSide: true,
             ajax:{
-                url: "<?=base_url('Kendaraan/all')?>",
+                url: "<?=base_url('kendaraan/all')?>",
                 method: 'GET'
             },
             columns:[
@@ -156,7 +174,10 @@
                 {data: 'nama_depan', render:(data,type,row,meta)=>{
                     return `${data}`;
                 }},
-                {data: 'jenis', render:(data,type,row,meta)=>{
+                {data: 'jeniskendaraan_id',},
+                {data: 'no_pol',},
+                {data: 'tahun',},
+                {data: 'warna', render:(data,type,row,meta)=>{
                     return `${data}`;
                 }},
                 {data: 'id',

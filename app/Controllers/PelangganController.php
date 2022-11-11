@@ -19,10 +19,10 @@ class PelangganController extends BaseController
     }
     public function all(){
         $mm = new PelangganModel();
-        $mm->select(['id', 'nama_depan']);
+        $mm->select(['id', 'nama_depan','nama_belakang','gender','alamat','kota','notelp','hp','email','tgl_daftar']);
         
         return (new Datatable ($mm))
-                ->setFieldFilter(['nama_depan'])
+                ->setFieldFilter(['nama_depan','nama_belakang','gender','alamat','kota','notelp','hp','email','tgl_daftar'])
                 ->draw();
     }
     public function show($id){
@@ -36,6 +36,14 @@ class PelangganController extends BaseController
 
         $id =  $mm -> insert([
             'nama_depan'       => $this->request->getVar('nama_depan'),
+            'nama_belakang'       => $this->request->getVar('nama_belakang'),
+            'gender'       => $this->request->getVar('gender'),
+            'alamat'       => $this->request->getVar('alamat'),
+            'kota'       => $this->request->getVar('kota'),
+            'notelp'       => $this->request->getVar('notelp'),
+            'hp'       => $this->request->getVar('hp'),
+            'email'       => $this->request->getVar('email'),
+            'tgl_daftar'       => $this->request->getVar('tgl_daftar'),
         ]);
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
@@ -48,7 +56,15 @@ class PelangganController extends BaseController
         throw PageNotFoundException::forPageNotFound();
         
         $hasil = $mm->update($id,[
-            'nama_depan'       => $this->request->getVar('nama_depan'),
+           'nama_depan'       => $this->request->getVar('nama_depan'),
+            'nama_belakang'       => $this->request->getVar('nama_belakang'),
+            'gender'       => $this->request->getVar('gender'),
+            'alamat'       => $this->request->getVar('alamat'),
+            'kota'       => $this->request->getVar('kota'),
+            'notelp'       => $this->request->getVar('notelp'),
+            'hp'       => $this->request->getVar('hp'),
+            'email'       => $this->request->getVar('email'),
+            'tgl_daftar'       => $this->request->getVar('tgl_daftar'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
     }

@@ -21,7 +21,7 @@ class KendaraanController extends BaseController
         $kgm = KendaraanModel::view();
          
         return (new Datatable($kgm))
-        ->setFieldFilter([ 'nama_depan' , 'jenis'])
+        ->setFieldFilter([ 'nama_depan' , 'jeniskendaraan_id','no_pol','tahun','warna'])
         ->draw();
     }
     public function show($id){
@@ -36,6 +36,9 @@ class KendaraanController extends BaseController
         $id =  $mm -> insert([
             'pelanggan_id'       => $this->request->getVar('pelanggan_id'),
             'jeniskendaraan_id'    => $this->request->getVar('jeniskendaraan_id'),
+            'no_pol'    => $this->request->getVar('no_pol'),
+            'tahun'    => $this->request->getVar('tahun'),
+            'warnakendaraan_id'    => $this->request->getVar('warnakendaraan_id'),
         ]);
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
@@ -50,6 +53,9 @@ class KendaraanController extends BaseController
         $hasil = $mm->update($id,[
             'pelanggan_id'       => $this->request->getVar('pelanggan_id'),
             'jeniskendaraan_id'    => $this->request->getVar('jeniskendaraan_id'),
+            'no_pol'    => $this->request->getVar('no_pol'),
+            'tahun'    => $this->request->getVar('tahun'),
+            'warnakendaraan_id'    => $this->request->getVar('warnakendaraan_id'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
     }
