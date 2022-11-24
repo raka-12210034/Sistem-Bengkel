@@ -13,7 +13,7 @@ class WarnaKendaraanController extends BaseController
     
     public function index()
     {
-        return view('WarnaKendaraan/table');       
+        return view('backend/WarnaKendaraan/table');       
     }
     public function all(){
         $mm = new WarnaKendaraanModel();

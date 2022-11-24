@@ -15,7 +15,7 @@ class PelangganController extends BaseController
     
     public function index()
     {
-        return view('Pelanggan/table');       
+        return view('backend/Pelanggan/table');       
     }
     public function all(){
         $mm = new PelangganModel();

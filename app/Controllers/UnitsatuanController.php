@@ -13,7 +13,7 @@ class UnitsatuanController extends BaseController
     
     public function index()
     {
-        return view('Unitsatuan/table');       
+        return view('backend/Unitsatuan/table');       
     }
     public function all(){
         $mm = new UnitsatuanModel();

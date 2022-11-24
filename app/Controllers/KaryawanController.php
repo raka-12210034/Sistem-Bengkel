@@ -20,18 +20,18 @@ class KaryawanController extends BaseController
         $karyawan = (new KaryawanModel())->where('email', $email)->first();
 
         if($karyawan == null){
-            return $this->response->setJSON(['message'=>'Email tidak terdaftar'])
+            return $this->response->setJSON(['message'=>'Daftar dulu Email nye :)'])
                         ->setStatusCode(404);
         }
 
         $cekPaswword = password_verify($password, $karyawan['sandi']);
         if($cekPaswword == false){
-            return $this->response->setJSON(['message'=>'Email dan Passowrd tidak cocok'])
+            return $this->response->setJSON(['message'=>'Email same Passowrd nda cocok '])
                         ->setStatusCode(403);
         }
 
         $this->session->set('karyawan', $karyawan);
-        return $this->response->setJSON(['message'=>"Selamat datang {$karyawan['nama_lengkap']}"])
+        return $this->response->setJSON(['message'=>"Walee Masok {$karyawan['nama_lengkap']}"])
                     ->setStatusCode(200);
     }
 
@@ -46,7 +46,7 @@ class KaryawanController extends BaseController
         $karyawan = (new KaryawanModel())->where('email', $_email)->first();
 
         if($karyawan == null){
-            return $this->response->setJSON(['message'=>'Email tidak terdaftar'])
+            return $this->response->setJSON(['message'=>'Email tadak terdaftar'])
                         ->setStatusCode(404);
         }
 
@@ -55,7 +55,7 @@ class KaryawanController extends BaseController
         $r = (new KaryawanModel())->update($karyawan['id'], $karyawan);
 
         if($r == false ){
-            return $this->response->setJSON(['message'=>'Gagal merubah sandi'])
+            return $this->response->setJSON(['message'=>'Gagal ngubah sandi '])
                         ->setStatusCode(502);
         }
 
@@ -86,7 +86,7 @@ class KaryawanController extends BaseController
 
     public function index()
     {
-        return view('Karyawan/table');       
+        return view('backend/Karyawan/table');       
     }
     public function all(){
         $mm = new KaryawanModel();

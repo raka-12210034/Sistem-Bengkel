@@ -11,7 +11,7 @@ class StatuspemeriksaanController extends BaseController
 {
     public function index()
     {
-        return view('Statuspemeriksaan/table');       
+        return view('backend/Statuspemeriksaan/table');       
     }
     public function all(){
         $mm = new StatuspemeriksaanModel();

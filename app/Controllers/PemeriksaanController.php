@@ -15,7 +15,7 @@ class PemeriksaanController extends BaseController
     
     public function index()
     {
-        return view('pemeriksaan/table');       
+        return view('backend/pemeriksaan/table');       
     }
     public function all(){
         $mm = PemeriksaanModel::view();

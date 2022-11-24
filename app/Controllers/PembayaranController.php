@@ -15,7 +15,7 @@ class PembayaranController extends BaseController
     
     public function index()
     {
-        return view('Pembayaran/table');       
+        return view('backend/Pembayaran/table');       
     }
     public function all(){
         $kgm = PembayaranModel::view();

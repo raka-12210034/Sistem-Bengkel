@@ -23,7 +23,7 @@
         <div class="container">
             <form method="post" action="<?=base_url('/login')?>">
                 <input type="hidden" name="_method" value="patch" />
-                <h3>Lupa Password Sistem Informasi Bengkel</h3>
+                <h3>Ciee Lupa Passowrd yaa! Coba ingat lagi :)</h3>
 
                 <div class="row">
                     <div class="form-froup col-md-4">

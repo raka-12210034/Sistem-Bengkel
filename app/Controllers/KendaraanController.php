@@ -15,7 +15,7 @@ class KendaraanController extends BaseController
     
     public function index()
     {
-        return view('Kendaraan/table');       
+        return view('backend/Kendaraan/table');       
     }
     public function all(){
         $kgm = KendaraanModel::view();

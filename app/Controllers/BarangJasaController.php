@@ -15,7 +15,7 @@ class BarangjasaController extends BaseController
     
     public function index()
     {
-        return view('barangjasa/table');       
+        return view('backend/barangjasa/table');       
     }
     public function all(){
         $kgm = BarangJasaModel::view();

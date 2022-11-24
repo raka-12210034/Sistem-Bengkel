@@ -13,7 +13,7 @@ class JenisKendaraanController extends BaseController
     
     public function index()
     {
-        return view('JenisKendaraan/table');       
+        return view('backend/JenisKendaraan/table');       
     }
     public function all(){
         $mm = new JenisKendaraanModel();

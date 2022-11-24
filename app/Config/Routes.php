@@ -163,6 +163,15 @@ $routes->group('pembayaran', function(RouteCollection $routes){
     $routes->get('(:num)', 'PembayaranController::show/$1');
     $routes->get('all', 'PembayaranController::all');
 });
+
+$routes->group('dashboard', function(RouteCollection $routes){
+    $routes->get('/', 'DashboardController::index');
+    $routes->post('/', 'DashboardController::store');
+    $routes->patch('/', 'DashboardController::update');
+    $routes->delete('/', 'DashboardController::delete');
+    $routes->get('(:num)', 'DashboardController::show/$1');
+    $routes->get('all', 'DashboardController::all');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
