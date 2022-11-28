@@ -106,6 +106,7 @@ $routes->group('karyawan', function(RouteCollection $routes){
     $routes->post('/', 'KaryawanController::store');
     $routes->patch('/', 'KaryawanController::update');
     $routes->delete('/', 'KaryawanController::delete');
+    $routes->get('(:num)/berkas.png', 'KaryawanController::berkas/$1');
     $routes->get('(:num)', 'KaryawanController::show/$1');
     $routes->get('all', 'KaryawanController::all');
 });
