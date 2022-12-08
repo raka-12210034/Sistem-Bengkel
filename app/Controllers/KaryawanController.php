@@ -60,7 +60,7 @@ class KaryawanController extends BaseController
         }
 
         $email = new Email(new ConfigEmail());
-        $email->setFrom('rakarss11@gmail.com', 'Sistem Arsip Digital');
+        $email->setFrom('rakarss11@gmail.com', 'Sistem Karyawan Digital');
         $email->setTo($karyawan['email']);
         $email->setSubject('Resest sandi karyawan');
         $email->setMessage("Halo {$karyawan['nama']} telah meminta reset baru. Reset baru kamu adalah <b>$sandibaru</b>");
@@ -115,6 +115,10 @@ class KaryawanController extends BaseController
             'token_reset'    => $this->request->getVar('token_reset'),
             'level'    => $this->request->getVar('level'),
         ]);
+
+        if($id > 0){
+            $this->simpanFile($id);
+        }
         return $this->response->setJSON(['id' => $id])
         ->setStatusCode(intval($id)> 0 ? 200 : 406);  
     }
@@ -135,6 +139,10 @@ class KaryawanController extends BaseController
             'token_reset'    => $this->request->getVar('token_reset'),
             'level'    => $this->request->getVar('level'),
         ]);
+
+        if($hasil == true){
+            $this->simpanFile($id);
+        }
         return $this->response->setJSON(['result'=>$hasil]);
     }
     public function delete(){
@@ -143,4 +151,35 @@ class KaryawanController extends BaseController
         $hasil = $mm->delete($id);
         return $this->response->setJSON(['result' => $hasil]);
     }    
+
+    private function simpanFile($id){
+        $file = $this->request->getFile('berkas');
+
+        if( $file->hasMoved() == false ){
+            $direktori = WRITEPATH . 'uploads/Karyawan';
+            if(file_exists($direktori) == false){
+                @mkdir($direktori);
+            }
+
+            $file->store('karyawan', $id . '.jpg');
+        }
+
+
+    }
+
+    public function berkas($id){
+        $am = new KaryawanModel();
+        $dt = $am->find($id);
+        if($dt == null)throw PageNotFoundException::forPageNotFound();
+
+        $path = WRITEPATH . 'uploads/karyawan/' . $id . '.jpg';
+        if(file_exists($path) == false){
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        echo file_get_contents($path);
+        return $this->response->setHeader('Content-type', 'image/jpeg')
+                    ->sendBody();
+    }
+
 }

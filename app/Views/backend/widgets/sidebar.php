@@ -53,7 +53,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
         aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-smile text-danger"></i>
+        <i class="fas fa-solid fa-user text-danger"></i>
         <span class="text-dark">Pelanggan</span>
     </a>
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"

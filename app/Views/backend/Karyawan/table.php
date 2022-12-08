@@ -4,6 +4,14 @@
         
 
             <div class="container">
+
+            <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-dark">Table Karyawan</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             
 
                 <button class="float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
@@ -65,6 +73,8 @@
                                 <label class="form-label">Level</label>
                                 <input type="text" name="level" class="form-control">
                             </div>
+
+                            <div class="mb-3" id="fileberkas"></div>
                             
                         </form>
                         </div>
@@ -73,6 +83,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            </div>
+            </div>
             </div>
 
             <?=$this->endSection()?>
@@ -84,7 +97,20 @@
             ></script>
             <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet"> 
             <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+            <script src="//cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 <script>
+
+        function buatDropify(filename = ''){
+        $('div#fileberkas').html(`
+            <input type="file" name="berkas" data-default-file="${filename}" />
+        `);
+        $('input[name=berkas]').dropify();
+    }
+
     $(document).ready(function(){
         
         
@@ -120,6 +146,7 @@
             $('#modalForm').modal('show');
             $('form#formKaryawan').trigger('reset');
             $('input[name=_method]').val('');
+            buatDropify('');
         });
 
         $('table#table-karyawan').on('click', '.btn-light', function (){
@@ -135,6 +162,7 @@
                 $('input[name=sandi]').val(e.sandi);
                 $('input[name=token_reset]').val(e.token_reset);
                 $('input[name=level]').val(e.level);
+                buatDropify(e.berkas);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
