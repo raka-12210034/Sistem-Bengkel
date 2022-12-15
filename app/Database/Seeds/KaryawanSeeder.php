@@ -22,6 +22,7 @@ class KaryawanSeeder extends Seeder
             'sandi'         => password_hash('admin', PASSWORD_BCRYPT),
             'token_reset'   => '',
             'level'         => 'MAN',
+            'foto'         => '',
         ]);
         echo "hasil id = $id";
         
